@@ -151,7 +151,10 @@ export default {
       span {
         margin-left: 10px;
         color: #7e57c2;
-        font-size: 26px;
+        font-size: 30px;
+        -webkit-box-reflect: below 1px linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        line-height: 0.7em;
+        animation: light 5s 1 forwards;
       }
     }
   }
@@ -175,9 +178,35 @@ export default {
       border-right: none;
 
       .title {
-        font-size: 18px;
+        font-size: 20px;
       }
     }
+  }
+}
+@keyframes light {
+  0%,
+  18%,
+  20%,
+  50.1%,
+  60%,
+  65.1%,
+  80%,
+  90.1%,
+  92% {
+    color: #0e3742;
+  }
+
+  18.1%,
+  20.1%,
+  50.1%,
+  60%,
+  65.1%,
+  80%,
+  90.1%,
+  100% {
+    border-color: #fff;
+    color: #fff;
+    text-shadow: 0 0 10px #a057c2, 0 0 20px #a057c2, 0 0 30px #a057c2, 0 0 80px #a057c2, 0 0 160px #a057c2;
   }
 }
 </style>

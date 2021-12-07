@@ -1,5 +1,6 @@
 html, body, #app{
     height: 100%;
+    min-width: 1366px;
 }
 
 *{
@@ -10,15 +11,24 @@ html, body, #app{
 
 .el-breadcrumb  {
     margin-bottom: 15px; 
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .el-table {
     margin-top: 20px;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .el-pagination {
     text-align: center;
     margin-top: 15px;
+}
+
+.el-dialog__body {
+    font-size: 16px;
+}
+
+.el-tree-node__label{
+    font-size: 16px;
+
 }

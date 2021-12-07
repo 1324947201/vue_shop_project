@@ -3,6 +3,7 @@ import './css/button.css'
 import './css/switch.css'
 import './css/pagination.css'
 import './css/breadcrumb.css'
+import './css/tree.css'
 import Vue from 'vue'
 
 //按需引入element组件
@@ -31,7 +32,11 @@ import {
     Tooltip,
     Pagination,
     Dialog,
-    MessageBox
+    MessageBox,
+    Tag,
+    Tree,
+    select,
+    Option
 } from 'element-ui'
 
 Vue.use(Button)
@@ -57,6 +62,11 @@ Vue.use(Switch)
 Vue.use(Tooltip)
 Vue.use(Pagination)
 Vue.use(Dialog)
+Vue.use(Tag)
+Vue.use(Tree)
+Vue.use(select)
+Vue.use(Option)
+
 
 //向Vue原型上进行挂载
 Vue.prototype.$message = Message

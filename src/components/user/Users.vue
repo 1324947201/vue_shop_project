@@ -34,42 +34,48 @@
         <el-table-column prop="mobile" label="电话"></el-table-column>
         <el-table-column prop="email" label="邮箱"></el-table-column>
         <el-table-column label="创建日期">
-          <template v-slot="receivedDate">
-            {{ $moment(receivedDate.row.create_time, 'X').format('YYYY-MM-DD') }}
+          <template v-slot="receivedData">
+            {{ $moment(receivedData.row.create_time, 'X').format('YYYY-MM-DD') }}
           </template>
         </el-table-column>
         <el-table-column prop="role_name" label="权限"> </el-table-column>
-        <el-table-column label="用户状态">
-          <template v-slot="receivedDate">
+        <el-table-column label="用户状态" width="180px">
+          <template v-slot="receivedData">
             <el-switch
-              v-model="receivedDate.row.mg_state"
+              v-model="receivedData.row.mg_state"
               active-text="启用"
               inactive-text="禁用"
-              @change="userStateChange(receivedDate.row)"
+              @change="userStateChange(receivedData.row)"
             >
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column label="操作">
-          <template v-slot="receivedDate">
+        <el-table-column label="操作" width="180px">
+          <template v-slot="receivedData">
             <el-tooltip effect="dark" content="编辑" placement="top" :enterable="false">
               <el-button
                 type="primary"
                 icon="el-icon-edit"
                 size="mini"
-                @click="showEditDialog(receivedDate.row.id)"
+                @click="showEditDialog(receivedData.row.id)"
                 plain
               ></el-button>
             </el-tooltip>
             <el-tooltip effect="dark" content="修改权限" placement="top" :enterable="false">
-              <el-button type="info" icon="el-icon-setting" size="mini" plain></el-button>
+              <el-button
+                type="warning"
+                icon="el-icon-setting"
+                size="mini"
+                plain
+                @click="setUserRight(receivedData.row)"
+              ></el-button>
             </el-tooltip>
             <el-tooltip effect="dark" content="删除" placement="top" :enterable="false">
               <el-button
                 type="danger"
                 icon="el-icon-delete"
                 size="mini"
-                @click="removeUserById(receivedDate.row.id)"
+                @click="removeUserById(receivedData.row.id)"
                 plain
               ></el-button>
             </el-tooltip>
@@ -126,18 +132,12 @@
     <el-dialog
       title="编辑用户"
       :visible.sync="editDialogVisible"
-      @close="editDialogClose()"
-      @keydown.enter="editUserInfo()"
+      @close="editDialogClose"
+      @keyup.enter.native="editUserInfo"
       width="50%"
     >
       <!-- 对话框内容主体区 -->
-      <el-form
-        ref="editFormRef"
-        :model="editForm"
-        :rules="editFormRules"
-        label-width="70px"
-        @keyup.enter.native="editUserInfo"
-      >
+      <el-form ref="editFormRef" :model="editForm" :rules="editFormRules" label-width="70px">
         <el-form-item label="id">
           <el-input v-model="editForm.id" disabled></el-input>
         </el-form-item>
@@ -155,6 +155,29 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="editDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="editUserInfo">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 修改用户权限对话框 -->
+    <el-dialog title="修改权限" :visible.sync="setUserDialogVisible" width="30%" @close="setRoleDialogClose">
+      <div>
+        <p>
+          当前用户：<a class="fake_a" href="JavaScript:;">{{ userInfo.username }}</a>
+        </p>
+        <p>
+          当前权限：<a class="fake_a" href="JavaScript:;">{{ userInfo.role_name }}</a>
+        </p>
+        <p>
+          修改权限：
+          <el-select v-model="selectedRoleId" placeholder="请选择">
+            <el-option v-for="item in rolesList" :key="item.id" :label="item.roleName" :value="item.id">
+            </el-option>
+          </el-select>
+        </p>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="setUserDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="saveRoleInfo">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -232,6 +255,14 @@ export default {
           { validator: checkMobile, trigger: 'blur' },
         ],
       },
+      //控制修改权限对话框的显示与隐藏
+      setUserDialogVisible: false,
+      //正在被修改权限的用户信息
+      userInfo: '',
+      //权限列表
+      rolesList: '',
+      //选中的权限id
+      selectedRoleId: '',
     }
   },
   methods: {
@@ -274,6 +305,12 @@ export default {
     resetAddForm() {
       //重置添加用户表单
       this.$refs.addFormRef.resetFields()
+      this.addForm = {
+        username: '',
+        password: '',
+        email: '',
+        mobile: '',
+      }
     },
     addUser() {
       //添加用户
@@ -281,7 +318,6 @@ export default {
         if (!valid) return
         //发起添加用户网络请求
         const { data: res } = await this.$http.post('users', this.addForm)
-        console.log(res)
         if (res.meta.status != 201)
           return this.$message({
             showClose: true,
@@ -350,7 +386,6 @@ export default {
       }) //点击确认后进入then
         .then(async () => {
           const { data: res } = await this.$http.delete(`users/${id}`)
-          console.log(res)
           if (res.meta.status != 200)
             return this.$message({
               showClose: true,
@@ -366,8 +401,48 @@ export default {
         })
         //点击取消后进入catch
         .catch((err) => {
-          this.$message('已取消删除')
+          this.$message('取消删除')
         })
+    },
+    async setUserRight(userInfo) {
+      //修改用户权限
+      this.userInfo = userInfo
+      const { data: res } = await this.$http.get('roles')
+      if (res.meta.status != 200)
+        return this.$message({
+          showClose: true,
+          message: res.meta.msg,
+          type: 'error',
+        })
+      this.rolesList = res.data
+      this.setUserDialogVisible = true
+    },
+    async saveRoleInfo() {
+      //点击按钮分配角色
+      if (!this.selectedRoleId) return
+
+      const { data: res } = await this.$http.put(`users/${this.userInfo.id}/role`, {
+        rid: this.selectedRoleId,
+      })
+      if (res.meta.status != 200)
+        return this.$message({
+          showClose: true,
+          message: res.meta.msg,
+          type: 'error',
+        })
+      this.$message({
+        showClose: true,
+        message: '用户权限更新成功',
+        type: 'success',
+      })
+      this.getUserList()
+      this.setUserDialogVisible = false
+    },
+    setRoleDialogClose() {
+      //分配权限对话框关闭前的操作
+      this.userInfo = ''
+      this.rolesList = ''
+      this.selectedRoleId = ''
     },
   },
   created() {
@@ -377,4 +452,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.fake_a {
+  text-decoration: none;
+  color: #a057c2;
+}
+p {
+  margin-bottom: 10px;
+}
 </style>
