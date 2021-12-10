@@ -10,11 +10,7 @@
     <!-- 卡片式图 -->
     <!-- 添加角色按钮 -->
     <el-card>
-      <el-row>
-        <el-col>
-          <el-button type="primary" @click="addDialogVisible = true">添加角色</el-button>
-        </el-col>
-      </el-row>
+      <el-button type="primary" @click="addDialogVisible = true">添加角色</el-button>
 
       <!-- 角色列表 -->
       <el-table :data="rolesList" style="width: 100%" stripe border>
@@ -108,7 +104,7 @@
       @keyup.enter.native="addRoleInfo"
     >
       <!-- 对话框内容主体区 -->
-      <el-form ref="addFormRef" :model="addForm" :rules="addFormRules" label-width="90px">
+      <el-form ref="addFormRef" :model="addForm" :rules="addFormRules" label-width="100px">
         <el-form-item label="角色名称" prop="roleName">
           <el-input v-model="addForm.roleName"></el-input>
         </el-form-item>
@@ -132,7 +128,7 @@
       @keyup.enter.native="editRoleInfo"
     >
       <!-- 对话框内容主体区 -->
-      <el-form ref="editFormRef" :model="editForm" :rules="editFormRules" label-width="90px">
+      <el-form ref="editFormRef" :model="editForm" :rules="editFormRules" label-width="100px">
         <el-form-item label="ID">
           <el-input v-model="editForm.roleId" disabled></el-input>
         </el-form-item>
@@ -300,6 +296,7 @@ export default {
       await this.$confirm('这将会永久删除角色信息，是否继续？', '确认信息', {
         confirmButtonText: '确认',
         cancelButtonText: '取消',
+        type: 'warning',
       }) //点击确认后进入then
         .then(async () => {
           const { data: res } = await this.$http.delete(`roles/${id}`)

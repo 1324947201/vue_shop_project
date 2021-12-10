@@ -90,7 +90,7 @@
         background
         layout="total, sizes, prev, pager, next, jumper"
         :current-page="queryInfo.pagenum"
-        :page-sizes="[1, 2, 5, 10]"
+        :page-sizes="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
         :page-size="queryInfo.pagesize"
         :total="total"
       >
@@ -159,7 +159,12 @@
     </el-dialog>
 
     <!-- 修改用户权限对话框 -->
-    <el-dialog title="修改权限" :visible.sync="setUserDialogVisible" width="30%" @close="setRoleDialogClose">
+    <el-dialog
+      title="修改权限"
+      :visible.sync="setUserDialogVisible"
+      width="30%"
+      @close="setRoleDialogClose"
+    >
       <div>
         <p>
           当前用户：<a class="fake_a" href="JavaScript:;">{{ userInfo.username }}</a>
@@ -383,6 +388,7 @@ export default {
       const confirmResult = await this.$confirm('这将会永久删除用户信息，是否继续？', '确认信息', {
         confirmButtonText: '确认',
         cancelButtonText: '取消',
+        type: 'warning',
       }) //点击确认后进入then
         .then(async () => {
           const { data: res } = await this.$http.delete(`users/${id}`)

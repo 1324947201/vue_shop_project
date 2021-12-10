@@ -5,6 +5,8 @@ import './plugins/element.js'
 import './assets/css/global.css'
 import axios from 'axios'
 import moment from 'moment'
+import treeTable from 'vue-table-with-tree-grid'
+
 
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 //axios请求拦截器，向请求头中添加token
@@ -15,6 +17,7 @@ axios.interceptors.request.use(config => {
 Vue.prototype.$http = axios
 Vue.prototype.$moment = moment;
 Vue.config.productionTip = false
+Vue.component('tree-table', treeTable)
 
 new Vue({
   router,

@@ -36,7 +36,8 @@ import {
     Tag,
     Tree,
     select,
-    Option
+    Option,
+    Cascader
 } from 'element-ui'
 
 Vue.use(Button)
@@ -66,6 +67,7 @@ Vue.use(Tag)
 Vue.use(Tree)
 Vue.use(select)
 Vue.use(Option)
+Vue.use(Cascader)
 
 
 //向Vue原型上进行挂载
