@@ -36,3 +36,7 @@ html, body, #app{
 .el-cascader-menu {
     height: 450px;
 }
+
+.el-tabs__item {
+    font-size: 18px;
+  }

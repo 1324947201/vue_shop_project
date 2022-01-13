@@ -4,7 +4,7 @@
     <el-header>
       <div class="header-link">
         <img src="../assets/image/avatar.png" alt="logo" />
-        <span>后台管理系统</span>
+        <span>Background Manager</span>
       </div>
       <el-button type="info" @click="logout" round>退出</el-button>
     </el-header>
@@ -151,7 +151,9 @@ export default {
       span {
         margin-left: 10px;
         color: #7e57c2;
+        font-family: 'Verdana';
         font-size: 30px;
+        font-weight: 700;
         -webkit-box-reflect: below 1px linear-gradient(transparent, rgba(0, 0, 0, 0.8));
         line-height: 0.7em;
         animation: light 5s 1 forwards;
@@ -206,7 +208,8 @@ export default {
   100% {
     border-color: #fff;
     color: #fff;
-    text-shadow: 0 0 10px #a057c2, 0 0 20px #a057c2, 0 0 30px #a057c2, 0 0 80px #a057c2, 0 0 160px #a057c2;
+    text-shadow: 0 0 10px #a057c2, 0 0 20px #a057c2, 0 0 30px #a057c2, 0 0 80px #a057c2,
+      0 0 160px #a057c2;
   }
 }
 </style>

@@ -4,6 +4,7 @@ import './css/switch.css'
 import './css/pagination.css'
 import './css/breadcrumb.css'
 import './css/tree.css'
+import './css/tabs.css'
 import Vue from 'vue'
 
 //按需引入element组件
@@ -37,7 +38,10 @@ import {
     Tree,
     select,
     Option,
-    Cascader
+    Cascader,
+    Alert,
+    Tabs,
+    TabPane
 } from 'element-ui'
 
 Vue.use(Button)
@@ -68,6 +72,9 @@ Vue.use(Tree)
 Vue.use(select)
 Vue.use(Option)
 Vue.use(Cascader)
+Vue.use(Alert)
+Vue.use(Tabs)
+Vue.use(TabPane)
 
 
 //向Vue原型上进行挂载

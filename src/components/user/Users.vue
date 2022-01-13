@@ -50,7 +50,7 @@
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="180px">
+        <el-table-column label="操作" width="200px">
           <template v-slot="receivedData">
             <el-tooltip effect="dark" content="编辑" placement="top" :enterable="false">
               <el-button

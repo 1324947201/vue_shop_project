@@ -88,10 +88,10 @@
       @keyup.enter.native="addCate"
     >
       <el-form ref="addCateFormRel" :model="addCateForm" :rules="addCateFormRulse" label-width="100px">
-        <el-form-item label="分类名称：" prop="cat_name">
+        <el-form-item label="分类名称:" prop="cat_name">
           <el-input v-model="addCateForm.cat_name"></el-input>
         </el-form-item>
-        <el-form-item label="父级分类：">
+        <el-form-item label="父级分类:">
           <!-- options指定数据源 -->
           <!-- props指定配置对象 -->
           <el-cascader
