@@ -29,16 +29,16 @@
       <!-- 用户列表区 -->
       <el-table :data="userList" style="width: 100%" stripe border>
         <el-table-column type="index"></el-table-column>
-        <el-table-column prop="id" label="ID"></el-table-column>
+        <el-table-column prop="id" label="ID" width="80px"></el-table-column>
         <el-table-column prop="username" label="姓名"></el-table-column>
         <el-table-column prop="mobile" label="电话"></el-table-column>
         <el-table-column prop="email" label="邮箱"></el-table-column>
-        <el-table-column label="创建日期">
+        <el-table-column label="创建日期" width="220px">
           <template v-slot="receivedData">
-            {{ $moment(receivedData.row.create_time, 'X').format('YYYY-MM-DD') }}
+            {{ receivedData.row.create_time | dateFormat }}
           </template>
         </el-table-column>
-        <el-table-column prop="role_name" label="权限"> </el-table-column>
+        <el-table-column prop="role_name" label="权限" width="150px"> </el-table-column>
         <el-table-column label="用户状态" width="180px">
           <template v-slot="receivedData">
             <el-switch

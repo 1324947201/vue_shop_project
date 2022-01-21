@@ -1,16 +1,16 @@
-html, body, #app{
+html, body, #app {
     height: 100%;
     min-width: 1366px;
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
-    font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif
 }
 
-.el-breadcrumb  {
-    margin-bottom: 15px; 
+.el-breadcrumb {
+    margin-bottom: 15px;
     font-size: 18px;
 }
 
@@ -28,9 +28,8 @@ html, body, #app{
     font-size: 16px;
 }
 
-.el-tree-node__label{
+.el-tree-node__label {
     font-size: 16px;
-
 }
 
 .el-cascader-menu {
@@ -39,4 +38,16 @@ html, body, #app{
 
 .el-tabs__item {
     font-size: 18px;
-  }
+}
+
+.el-steps {
+    margin-bottom: 20px;
+}
+
+.el-step__title {
+    font-size: 16px !important;
+}
+
+.ql-editor {
+    min-height: 250px;
+}

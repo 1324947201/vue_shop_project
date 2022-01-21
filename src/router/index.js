@@ -1,30 +1,24 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '../components/Login'
-import Home from '../components/Home'
-import Welcome from '../components/Welcome'
-import Users from '../components/user/Users'
-import Rights from '../components/power/Rights'
-import Roles from '../components/power/Roles'
-import Cate from '../components/goods/Cate'
-import Params from '../components/goods/Params'
-
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/login', component: Login },
+  { path: '/login', component: () => import('../components/Login') },
   { path: '/', redirect: '/login' },
   {
     path: '/home',
-    component: Home,
+    component: () => import('../components/Home'),
     redirect: '/welcome',
     children: [
-      { path: '/welcome', component: Welcome },
-      { path: '/users', component: Users },
-      { path: '/rights', component: Rights },
-      { path: '/roles', component: Roles },
-      { path: '/categories', component: Cate },
-      { path: '/params', component: Params },
+      { path: '/welcome', component: () => import('../components/Welcome') },
+      { path: '/users', component: () => import('../components/user/Users') },
+      { path: '/rights', component: () => import('../components/power/Rights') },
+      { path: '/roles', component: () => import('../components/power/Roles') },
+      { path: '/categories', component: () => import('../components/goods/Cate') },
+      { path: '/params', component: () => import('../components/goods/Params') },
+      { path: '/goods', component: () => import('../components/goods/List') },
+      { path: '/goods/add', component: () => import('../components/goods/Add') },
+
     ]
   }
 ]
