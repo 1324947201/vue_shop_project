@@ -318,7 +318,7 @@ export default {
 }
 </script>
 
-<style lang="less" scope>
+<style lang="less" scoped>
 .el-form-item__label {
   font-size: 16px;
   padding: 0px 10px;

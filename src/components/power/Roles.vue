@@ -64,29 +64,35 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column type="index"></el-table-column>
+        <el-table-column type="index" align="center"></el-table-column>
         <el-table-column prop="roleName" label="角色名称"></el-table-column>
         <el-table-column prop="roleDesc" label="角色描述"></el-table-column>
-        <el-table-column label="操作" width="320px">
+        <el-table-column label="操作" width="340px" align="center">
           <template v-slot="receivedData">
             <el-button
+              class="centrol-button"
               type="primary"
               icon="el-icon-edit"
               size="small"
+              plain
               @click="showEditDialog(receivedData.row.id)"
               >编辑</el-button
             >
             <el-button
+              class="centrol-button"
               type="warning"
               icon="el-icon-setting"
               size="small"
+              plain
               @click="showSetRightDialog(receivedData.row)"
               >权限</el-button
             >
             <el-button
+              class="centrol-button"
               type="danger"
               icon="el-icon-delete"
               size="small"
+              plain
               @click="removeRoleById(receivedData.row.id)"
               >删除</el-button
             >

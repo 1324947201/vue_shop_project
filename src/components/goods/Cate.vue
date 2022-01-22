@@ -50,6 +50,7 @@
         <!-- opt模板列 -->
         <template v-slot:opt="receivedData">
           <el-button
+            class="centrol-button"
             type="primary"
             icon="el-icon-edit"
             size="small"
@@ -57,6 +58,7 @@
             >编辑</el-button
           >
           <el-button
+            class="centrol-button"
             type="danger"
             icon="el-icon-delete"
             size="small"
@@ -87,7 +89,7 @@
       @close="addDialogClose"
       @keyup.enter.native="addCate"
     >
-      <el-form ref="addCateFormRel" :model="addCateForm" :rules="addCateFormRulse" label-width="100px">
+      <el-form ref="addCateFormRef" :model="addCateForm" :rules="addCateFormRulse" label-width="100px">
         <el-form-item label="分类名称:" prop="cat_name">
           <el-input v-model="addCateForm.cat_name"></el-input>
         </el-form-item>
@@ -117,7 +119,7 @@
       @close="editDialogClose"
       @keyup.enter.native="editCate"
     >
-      <el-form ref="form" :model="editForm" :rules="editCateFormRulse" label-width="80px">
+      <el-form ref="editFormRef" :model="editForm" :rules="editCateFormRulse" label-width="80px">
         <el-form-item label="名称" prop="cat_name">
           <el-input v-model="editForm.cat_name"></el-input>
         </el-form-item>
@@ -262,7 +264,7 @@ export default {
     },
     addCate() {
       //点击添加新分类
-      this.$refs.addCateFormRel.validate(async (valid) => {
+      this.$refs.addCateFormRef.validate(async (valid) => {
         if (!valid) return
         const { data: res } = await this.$http.post('categories', this.addCateForm)
         if (res.meta.status !== 201)
@@ -285,7 +287,7 @@ export default {
       this.addCateForm.cat_pid = 0
       this.addCateForm.cat_level = 0
       this.selectedKeys = []
-      this.$refs.addCateFormRel.resetFields()
+      this.$refs.addCateFormRef.resetFields()
     },
     async showEditDialog(id) {
       //展示编辑对话框
@@ -322,6 +324,7 @@ export default {
     editDialogClose() {
       this.editForm.cat_name = ''
       this.editForm.cat_id = 0
+      this.$refs.editFormRef.resetFields()
     },
     async removeCateById(id) {
       //删除分类

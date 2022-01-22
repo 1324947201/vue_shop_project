@@ -51,3 +51,7 @@ html, body, #app {
 .ql-editor {
     min-height: 250px;
 }
+
+.centrol-button {
+    margin: 0 6px;
+}

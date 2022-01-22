@@ -28,18 +28,18 @@
 
       <!-- 用户列表区 -->
       <el-table :data="userList" style="width: 100%" stripe border>
-        <el-table-column type="index"></el-table-column>
-        <el-table-column prop="id" label="ID" width="80px"></el-table-column>
-        <el-table-column prop="username" label="姓名"></el-table-column>
-        <el-table-column prop="mobile" label="电话"></el-table-column>
+        <el-table-column type="index" align="center"></el-table-column>
+        <el-table-column prop="id" label="ID" width="80px" align="center"></el-table-column>
+        <el-table-column prop="username" label="姓名" width="150px"></el-table-column>
         <el-table-column prop="email" label="邮箱"></el-table-column>
-        <el-table-column label="创建日期" width="220px">
+        <el-table-column prop="mobile" label="电话" align="center"></el-table-column>
+        <el-table-column label="创建日期" width="280px" align="center">
           <template v-slot="receivedData">
             {{ receivedData.row.create_time | dateFormat }}
           </template>
         </el-table-column>
-        <el-table-column prop="role_name" label="权限" width="150px"> </el-table-column>
-        <el-table-column label="用户状态" width="180px">
+        <el-table-column prop="role_name" label="权限" width="150px" align="center"> </el-table-column>
+        <el-table-column label="用户状态" width="180px" align="center">
           <template v-slot="receivedData">
             <el-switch
               v-model="receivedData.row.mg_state"
@@ -50,10 +50,11 @@
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="200px">
+        <el-table-column label="操作" width="220px" align="center">
           <template v-slot="receivedData">
             <el-tooltip effect="dark" content="编辑" placement="top" :enterable="false">
               <el-button
+                class="centrol-button"
                 type="primary"
                 icon="el-icon-edit"
                 size="mini"
@@ -63,6 +64,7 @@
             </el-tooltip>
             <el-tooltip effect="dark" content="修改权限" placement="top" :enterable="false">
               <el-button
+                class="centrol-button"
                 type="warning"
                 icon="el-icon-setting"
                 size="mini"
@@ -72,6 +74,7 @@
             </el-tooltip>
             <el-tooltip effect="dark" content="删除" placement="top" :enterable="false">
               <el-button
+                class="centrol-button"
                 type="danger"
                 icon="el-icon-delete"
                 size="mini"
@@ -167,13 +170,13 @@
     >
       <div>
         <p>
-          当前用户：<a class="fake_a" href="JavaScript:;">{{ userInfo.username }}</a>
+          当前用户:<a class="fake_a" href="JavaScript:;">{{ userInfo.username }}</a>
         </p>
         <p>
-          当前权限：<a class="fake_a" href="JavaScript:;">{{ userInfo.role_name }}</a>
+          当前权限:<a class="fake_a" href="JavaScript:;">{{ userInfo.role_name }}</a>
         </p>
         <p>
-          修改权限：
+          修改权限:
           <el-select v-model="selectedRoleId" placeholder="请选择">
             <el-option v-for="item in rolesList" :key="item.id" :label="item.roleName" :value="item.id">
             </el-option>

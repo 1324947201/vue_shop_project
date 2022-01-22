@@ -28,18 +28,21 @@
 
       <!-- table表格区 -->
       <el-table :data="goodsList" border stripe>
-        <el-table-column type="index"> </el-table-column>
+        <el-table-column type="index" align="center"> </el-table-column>
         <el-table-column label="商品名称" prop="goods_name"> </el-table-column>
-        <el-table-column label="商品价格(元)" prop="goods_price" width="120px"> </el-table-column>
-        <el-table-column label="商品重量(kg)" prop="goods_weight" width="120px"> </el-table-column>
-        <el-table-column label="商品创建时间" width="220px" v-slot="receiveData">
+        <el-table-column label="商品价格(元)" prop="goods_price" width="120px" align="center">
+        </el-table-column>
+        <el-table-column label="商品重量(kg)" prop="goods_weight" width="120px" align="center">
+        </el-table-column>
+        <el-table-column label="商品创建时间" width="280px" v-slot="receiveData" align="center">
           <template>
             {{ receiveData.row.add_time | dateFormat }}
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="200px" v-slot="receiveData">
+        <el-table-column label="操作" width="240px" v-slot="receiveData" align="center">
           <template>
             <el-button
+              class="centrol-button"
               size="mini"
               type="primary"
               icon="el-icon-edit"
@@ -47,6 +50,7 @@
               >编辑</el-button
             >
             <el-button
+              class="centrol-button"
               size="mini"
               type="danger"
               icon="el-icon-delete"
@@ -76,6 +80,7 @@
       title="编辑商品信息"
       :visible.sync="editDialogVisiable"
       width="50%"
+      @close="editDialogClose"
       @keyup.enter.native="editGoods"
     >
       <el-form ref="editFormRef" :model="editForm" :rules="editFormRulse">
@@ -214,6 +219,11 @@ export default {
         this.editDialogVisiable = false
         this.getGoodsList()
       })
+    },
+    editDialogClose() {
+      //编辑对话框关闭
+      this.editForm = {}
+      this.$refs.editFormRef.resetFields()
     },
   },
   created() {

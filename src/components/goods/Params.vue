@@ -65,11 +65,12 @@
                 >
               </template>
             </el-table-column>
-            <el-table-column type="index"> </el-table-column>
+            <el-table-column type="index" align="center"> </el-table-column>
             <el-table-column label="参数名称" prop="attr_name"> </el-table-column>
-            <el-table-column label="操作">
+            <el-table-column label="操作" width="300px" align="center">
               <template v-slot="receiveData">
                 <el-button
+                  class="centrol-button"
                   type="primary"
                   size="mini"
                   icon="el-icon-edit"
@@ -77,6 +78,7 @@
                   >修改参数</el-button
                 >
                 <el-button
+                  class="centrol-button"
                   type="danger"
                   size="mini"
                   icon="el-icon-delete"
@@ -125,11 +127,12 @@
                 >
               </template>
             </el-table-column>
-            <el-table-column type="index"> </el-table-column>
+            <el-table-column type="index" align="center"> </el-table-column>
             <el-table-column label="属性名称" prop="attr_name"> </el-table-column>
-            <el-table-column label="操作">
+            <el-table-column label="操作" width="300px" align="center">
               <template v-slot="receiveData">
                 <el-button
+                  class="centrol-button"
                   type="primary"
                   size="mini"
                   icon="el-icon-edit"
@@ -137,6 +140,7 @@
                   >修改属性</el-button
                 >
                 <el-button
+                  class="centrol-button"
                   type="danger"
                   size="mini"
                   icon="el-icon-delete"
@@ -173,11 +177,11 @@
     <el-dialog
       :title="'修改' + focusTitle"
       :visible.sync="editDialogVisiable"
-      width="30%"
+      width="50%"
       @keyup.enter.native="editParams"
       @close="editDialogClosed"
     >
-      <el-form ref="editFormRef" :model="editForm" :rules="editFormRulse" label-width="80px">
+      <el-form ref="editFormRef" :model="editForm" :rules="editFormRulse" label-width="100px">
         <el-form-item :label="focusTitle" prop="attr_name">
           <el-input v-model="editForm.attr_name"></el-input>
         </el-form-item>
