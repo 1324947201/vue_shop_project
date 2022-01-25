@@ -4,7 +4,7 @@
     <el-header>
       <div class="header-link">
         <img src="../assets/image/avatar.png" alt="logo" />
-        <span>Background Manager</span>
+        <span>在线交易后台管理系统</span>
       </div>
       <el-button type="info" @click="logout" round>退出</el-button>
     </el-header>
@@ -66,8 +66,8 @@ export default {
         102: 'el-icon-s-order',
         145: 'el-icon-s-data',
       },
-      isCollapse: false,
-      elMenuWidth: '220px',
+      isCollapse: true,
+      elMenuWidth: '64px',
     }
   },
   computed: {
@@ -151,9 +151,8 @@ export default {
       span {
         margin-left: 10px;
         color: #7e57c2;
-        font-family: 'Verdana';
         font-size: 30px;
-        font-weight: 700;
+        font-weight: 500;
         -webkit-box-reflect: below 1px linear-gradient(transparent, rgba(0, 0, 0, 0.8));
         line-height: 0.7em;
         animation: light 5s 1 forwards;

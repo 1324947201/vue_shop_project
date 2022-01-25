@@ -1,11 +1,3 @@
-//自定义element ui主题-按需引入
-import './css/button.css'
-import './css/switch.css'
-import './css/pagination.css'
-import './css/breadcrumb.css'
-import './css/tree.css'
-import './css/tabs.css'
-import './css/upload.css'
 import Vue from 'vue'
 
 //按需引入element组件
