@@ -22,6 +22,7 @@
           :collapse-transition="false"
           :router="true"
           :default-active="activePath"
+          @select="handleSelect"
         >
           <!-- 一级菜单 -->
           <el-submenu v-for="item in menuList" :key="item.id" :index="item.id + ''">
@@ -47,7 +48,7 @@
         </el-menu>
       </el-aside>
       <!-- 右侧主体内容 -->
-      <el-main>
+      <el-main ref="elMainRef" :class="classStr">
         <router-view></router-view>
       </el-main>
     </el-container>
@@ -68,6 +69,7 @@ export default {
       },
       isCollapse: true,
       elMenuWidth: '64px',
+      classStr: 'elMain-padding-none',
     }
   },
   computed: {
@@ -113,6 +115,10 @@ export default {
         this.$refs.toggleButton.setAttribute('class', 'el-icon-s-fold')
       }
     },
+    handleSelect() {
+      //导航栏发生切换时，修改el-main的padding
+      this.classStr = 'elMain-padding-normal'
+    },
     saveNavState(activePath) {
       //保存链接的激活状态
       sessionStorage.setItem('activePath', activePath)
@@ -125,6 +131,14 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.elMain-padding-none {
+  padding: 0;
+}
+
+.elMain-padding-normal {
+  padding: 20;
+}
+
 .el-container {
   height: 100%;
   background-color: #e9edf0;

@@ -80,7 +80,7 @@ export default {
           type: 'success',
         })
         sessionStorage.setItem('token', res.data.token) //向sessionStorage中存入token
-        this.$router.push('/home') //路由跳转
+        this.$router.push('/welcome') //路由跳转
       })
     },
   },
@@ -109,8 +109,10 @@ export default {
       }
 
       function o() {
-        ;(a = m.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth),
-          (c = m.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight)
+        ;(a = m.width =
+          window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth),
+          (c = m.height =
+            window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight)
       }
 
       function i() {
