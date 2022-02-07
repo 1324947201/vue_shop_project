@@ -37,7 +37,7 @@
           </el-button>
           <!-- 动态参数表格 -->
           <el-table :data="manyTableData" border stripe>
-            <img class="no-data" slot="empty" src="../../../public/no-data.jpg" alt="暂无数据" />
+            <img class="no-data" slot="empty" src="../../assets/no-data.jpg" alt="暂无数据" />
             <el-table-column type="expand">
               <!-- 具体参数值tag标签 -->
               <template v-slot="receiveData">
@@ -99,7 +99,7 @@
           >
           <!-- 静态属性表格 -->
           <el-table :data="onlyTableData" border stripe>
-            <img class="no-data" slot="empty" src="../../../public/no-data.jpg" alt="暂无数据" />
+            <img class="no-data" slot="empty" src="../../assets/no-data.jpg" alt="暂无数据" />
             <el-table-column type="expand">
               <!-- 具体参数值tag标签 -->
               <template v-slot="receiveData">

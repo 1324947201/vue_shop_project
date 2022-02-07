@@ -2,15 +2,21 @@
   <div class="demo-3">
     <main id="main">
       <div class="content">
-        <canvas class="landscape"></canvas>
-        <h2 class="content__title">欢迎使用</h2>
+        <canvas class="landscape" width="100%" height="100%"></canvas>
+        <h2 class="content__title">Welcome</h2>
       </div>
+      <div :class="classStr"></div>
     </main>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      classStr: 'overlay',
+    }
+  },
   mounted() {
     let main = document.getElementById('main')
     let script1 = document.createElement('script')
@@ -262,11 +268,17 @@ export default {
     let script8 = document.createElement('script')
     script8.src = 'js/demo3.js'
     main.appendChild(script8)
+
+    let that = this
+    setTimeout(function () {
+      that.classStr = 'hidden'
+    }, 2100)
   },
 }
 </script>
 
 <style scoped>
+@import '../assets/css/base.css';
 .demo-3,
 .demo-3 main,
 .demo-3 main canvas,
@@ -275,34 +287,7 @@ export default {
   height: 100% !important;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-}
-
-.content__title {
-  position: relative;
-  color: #eee;
-  font-size: 6vw;
-  text-transform: uppercase;
-  margin: 0;
-  perspective: 1000px;
-  transform: translate(0, -80%);
-}
-
-.content__title span {
-  display: inline-block;
-  white-space: pre;
-  transform-origin: 50% -50%;
-}
-
-.landscape {
-  position: absolute;
-  top: 0;
-  left: 0;
+.hidden {
+  overflow: none;
 }
 </style>
